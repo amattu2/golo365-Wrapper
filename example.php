@@ -9,7 +9,10 @@ $wrapper = new amattu\Golo365();
 echo "<pre>";
 
 // Pull Diagnostic reports by VIN
-print_r($wrapper->reportListByVIN(""));
+//print_r($wrapper->reportListByVIN(""));
 
 // Pull Diagnostic reports by License Plate Number
 //print_r($wrapper->reportListByPlateNumber("123456"));
+
+// Fetch additional details about a Diagnostic report
+//print_r($wrapper->reportDetail(1, "X"));

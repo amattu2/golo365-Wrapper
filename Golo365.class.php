@@ -38,7 +38,14 @@ class Golo365 {
    *
    * @var int
    */
-  public const STATUS_CODE_SUCCESS = 0;
+  private const STATUS_CODE_SUCCESS = 0;
+
+  /**
+   * Array of valid Diagnostic Record Types
+   *
+   * @var array
+   */
+  private const RECORD_TYPES = Array("A", "D", "E", "X", "TC");
 
   /**
    * An array of Golo365 endpoints
@@ -47,6 +54,7 @@ class Golo365 {
    */
   private $endpoints = [
     "reportList" => "http://%service.golo365.com/Home/HttApi/reportList",
+    "reportDetail" => "http://%service.golo365.com/Home/HttApi/reportDetail",
     "upload_report_data" => "http://%service.golo365.com/Home/Cloud/upload_report_data",
     "getPlateByVin" => "http://%service.golo365.com/Home/HttApi/getPlateByVin",
     "getVinByplateNum" => "http://%service.golo365.com/Home/Index/getVinByplateNum",
@@ -268,11 +276,56 @@ class Golo365 {
         "plate_number" => $result["plate_number"] || "",
         "url" => $result["report_url"],
         "type" => $result["report_type"],
+        // TBD add raw function and reportDetail function
       );
     }
 
     // Return
     return $formatted_result;
+  }
+
+  /**
+   * Fetch additional details about a diagnostic scan
+   *
+   * @param  int $record_id
+   * @param  string $type
+   * @return array
+   * @throws \TypeError
+   * @throws \InvalidArgumentException
+   * @since  1.0.0
+   */
+  public function reportDetail(int $record_id, string $type) : array
+  {
+    // Validate Record ID
+    if (!$record_id || $record_id <= 0) {
+      throw new \InvalidArgumentException("The record ID must be a positive integer");
+    }
+
+    // Validate Type
+    if (!$type || !in_array($type, Golo365::RECORD_TYPES)) {
+      throw new \InvalidArgumentException("The type must be one of the following: " . implode(", ", Golo365::RECORD_TYPES));
+    }
+
+    // Fetch Data
+    $results = $this->post($this->endpoints["reportDetail"], $this->build_query_string([
+      "diagnose_record_id" => $record_id,
+      "report_type" => $type,
+    ])) ?: [];
+
+    // Validate Return Data
+    if (!$results["system_list"] || !$results["diagnose_soft_ver"] || !$results["vin"]) {
+      return [];
+    }
+
+    // Return
+    return Array(
+      "software_version" => $results["diagnose_soft_ver"],
+      "software_package" => $results["softpackageid"],
+      "system_list" => $results["system_list"],
+      "_raw" => function() use ($results) {
+        return $results;
+      }
+    );
   }
 
   /**

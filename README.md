@@ -1,15 +1,15 @@
 # Introduction
-## What is Golo365
-Golo365 is the underlying service behind many automotive diagnostic computers and equipment. Device manufacturers, such as Launch Tech LTD and Matco Tools rely on them for various services. The goal of this API wrapper is to simplify access to Golo365's *extremely undocumented* API endpoints, and to allow for independent individuals or companies to integrate critical data connections between Golo365 and their proprietary services.
+## What is Golo365?
+Golo365 is the underlying data connection service behind many automotive diagnostic computers and equipment. Device manufacturers, such as Launch Tech LTD and Matco Tools rely on them for various services. The goal of this API wrapper is to simplify access to Golo365's *extremely undocumented* API endpoints, and to allow for independent individuals or companies to integrate critical data connections between Golo365 and their own proprietary services.
 
-## How can I use this wrapper
-Here are some ways you can use this API wrapper to facilitate a connection between your service (e.g. a Shop Management System) and Golo365:
+## How can I use this wrapper?
+The end goal of the wrapper is to remove the concept of relying the handheld diagnostic computer, as well as the physical connection to the vehicle, in order to retrieve diagnostic history for a vehicle. This is possible because Golo365 (i.e. AIT / DBSCAR / X431) stores the scan history in the cloud. Here are some ways you can use this API wrapper to facilitate a connection between your service (e.g. a Shop Management System) and Golo365:
 - Fetch Diagnostic Scan History reports by License Plate or VIN numbers
 - Perform a VIN-to-License plate decode
 - Perform a License-to-VIN decode
 - ... More integrations coming soon
 
-## Am I in the right place
+## Am I in the right place?
 ### Related Domains
 
 If any of the following domains look familiar to you, then you're probably in the right place.
@@ -48,8 +48,10 @@ Many hours of research and development went into discovering these entirely undo
 ___
 
 # Usage
+The function documentation is below. Alternatively, see the `example.php` file included with the repository for hands-on demonstrations of various functionality.
+
 ## __construct
-The class constructor takes only optional arguments.
+The class constructor accepts only optional arguments.
 
 ```PHP
 /**
@@ -136,7 +138,7 @@ Array
     [type] => string
   )
 
-  // ...
+  // ... repeating
 
 )
 ```
@@ -176,13 +178,53 @@ Array
     [type] => string
   )
 
-  // ...
+  // ... repeating
 
 )
 ```
 
 ### Notes
-- The reliability of this function is dependent on end-users reporting the License Plate Number during the diagnostic session. If this was not done, those results will not be included in the return value. **If possible, use `reportListByVIN` instead**.
+1. The reliability of this function is dependent on end-users reporting the License Plate Number during the diagnostic session. If this was not done, those results will not be included in the return value. **If possible, use `reportListByVIN` instead**.
+
+## reportDetail
+This endpoint provides additional details about a diagnostic event record; such as which systems were scanned, which software was used, etc.
+
+```PHP
+/**
+ * Fetch additional details about a diagnostic scan
+ *
+ * @param  int $record_id
+ * @param  string $type
+ * @return array
+ * @throws \TypeError
+ * @throws \InvalidArgumentException
+ * @since  1.0.0
+ */
+public function reportDetail(int $record_id, string $type) : array
+```
+
+### Output
+```PHP
+Array
+(
+  [software_version] => string
+  [software_package] => string
+  [system_list] => Array
+  (
+    [0] => Array
+    (
+        [system_uid] => padded int
+        [system] => string
+        [name_id] => int
+        [is_new_sys] => int
+    )
+  )
+  [_raw] => Closure Object
+)
+```
+
+### Notes
+1. To access the raw data from this array, call the anonymous function (closure) `_raw`
 
 ___
 
