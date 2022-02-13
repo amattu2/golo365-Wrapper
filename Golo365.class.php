@@ -23,6 +23,8 @@
 // Class Namespace
 namespace amattu;
 
+use Exception;
+
 /**
  * Golo-Wrapper
  *
@@ -45,6 +47,9 @@ class Golo365 {
    */
   private $endpoints = [
     "reportList" => "http://%service.golo365.com/Home/HttApi/reportList",
+    "upload_report_data" => "http://%service.golo365.com/Home/Cloud/upload_report_data",
+    "getPlateByVin" => "http://%service.golo365.com/Home/HttApi/getPlateByVin",
+    "getVinByplateNum" => "http://%service.golo365.com/Home/Index/getVinByplateNum",
   ];
 
   /**
@@ -268,6 +273,41 @@ class Golo365 {
 
     // Return
     return $formatted_result;
+  }
+
+  /**
+   * Fetch a License Plate by the VIN Number
+   *
+   * @param  string $VIN the VIN number to search
+   * @return array
+   * @since  1.0.0
+   */
+  public function getPlateByVIN(string $plate_number) : array
+  {
+    throw new Exception("Unimplemented function");
+  }
+
+  /**
+   * Fetch the VIN by License Plate
+   *
+   * @param  string $plate_number License Plate # to search
+   * @return array
+   * @since  1.0.0
+   */
+  public function getVINByPlateNumber(string $plate_number) : array
+  {
+    throw new Exception("Unimplemented function");
+  }
+
+  /**
+   * Upload a new Diagnostic Event
+   *
+   * @return array
+   * @since  1.0.0
+   */
+  public function upload_report_data() : array
+  {
+    throw new Exception("Unimplemented function");
   }
 
   /**
