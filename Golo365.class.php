@@ -207,7 +207,7 @@ class Golo365 {
     return $formatted_result;
   }
 
-    /**
+  /**
    * Fetch Diagnostic Scan History by License Plate Number
    *
    * Note:
