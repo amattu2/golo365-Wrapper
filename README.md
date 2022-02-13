@@ -1,11 +1,15 @@
 # Introduction
-The goal of this API wrapper is to simplify access to Golo365's internal API endpoints. Examples of such endpoints include:
-- Vehicle Diagnostic Scan History by VIN
-- VIN to License Plate
-- License Plate to VIN
-- ... More coming soon
+## What is Golo365
+Golo365 is the underlying service behind many automotive diagnostic computers and equipment. Device manufacturers, such as Launch Tech LTD and Matco Tools rely on them for various services. The goal of this API wrapper is to simplify access to Golo365's *extremely undocumented* API endpoints, and to allow for independent individuals or companies to integrate critical data connections between Golo365 and their proprietary services.
 
-P.S.,
+## How can I use this wrapper
+Here are some ways you can use this API wrapper to facilitate a connection between your service (e.g. a Shop Management System) and Golo365:
+- Fetch Diagnostic Scan History reports by License Plate or VIN numbers
+- Perform a VIN-to-License plate decode
+- Perform a License-to-VIN decode
+- ... More integrations coming soon
+
+## Am I in the right place
 If any of the following domains look familiar to you, then you're probably in the right place.
 - https://www.golo365.com/
 - https://www.launchtechusa.com/
@@ -14,6 +18,11 @@ If any of the following domains look familiar to you, then you're probably in th
 - http://dbscar.com/
 - http://ait.golo365.com
 - http://aitus.golo365.com
+
+## Contributions
+Many hours of research and development went into discovering these entirely undocumented API endpoints. If you have an unlisted Golo365 endpoint, or know something that isn't listed here, please reach out via a Issue or Pull Request.
+
+___
 
 # Usage
 ## __construct
@@ -89,7 +98,7 @@ This function fetches all reported diagnostic events for the provided VIN.
 public function reportListByVIN(string $VIN, $page = "") : array
 ```
 
-Expected return result
+### Output
 ```PHP
 Array
 (
@@ -129,7 +138,7 @@ Array
 public function reportListByPlateNumber(string $plate_number, $page = "") : array
 ```
 
-Expected return result
+### Output
 ```PHP
 Array
 (
@@ -148,6 +157,20 @@ Array
 
 )
 ```
+
+### Notes
+- The reliability of this function is dependent on end-users reporting the License Plate Number during the diagnostic session. If this was not done, those results will not be included in the return value. **If possible, use `reportListByVIN` instead.
+
+___
+
+# To-Do
+- getPlateByVIN
+- getVINByPlateNumber
+- upload_report_data
+- upload_accessory_info
+- mergeMultiReport
+
+___
 
 # Requirements & Dependencies
 - PHP7+
