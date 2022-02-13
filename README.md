@@ -159,7 +159,7 @@ Array
 ```
 
 ### Notes
-- The reliability of this function is dependent on end-users reporting the License Plate Number during the diagnostic session. If this was not done, those results will not be included in the return value. **If possible, use `reportListByVIN` instead.
+- The reliability of this function is dependent on end-users reporting the License Plate Number during the diagnostic session. If this was not done, those results will not be included in the return value. **If possible, use `reportListByVIN` instead**.
 
 ___
 
