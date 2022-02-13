@@ -10,6 +10,8 @@ Here are some ways you can use this API wrapper to facilitate a connection betwe
 - ... More integrations coming soon
 
 ## Am I in the right place
+### Related Domains
+
 If any of the following domains look familiar to you, then you're probably in the right place.
 - https://www.golo365.com/
 - https://www.launchtechusa.com/
@@ -19,8 +21,21 @@ If any of the following domains look familiar to you, then you're probably in th
 - http://ait.golo365.com
 - http://aitus.golo365.com
 
+### Related Auto Diagnostic Equipment
+
+Or, if your shop is using any of the following tools, you're probably in the right place:
+- [MATCO MAXIMUS 4.0 TABLET](https://www.matcotools.com/catalog/product/MDMAX4CL/MAXIMUS-4-0-TABLET-WITH-PASSENGER-CAR-SOFTWARE/)
+- [Launch Gear Scan Plus Diagnostic Tool](https://www.bestbuyautoequipment.com/launch-gear-scan-plus-diagnostic-tool-p/301050458.htm)
+- [Launch X-431 Torque 3](https://www.launchtechusa.com/product-page/x431-torqueiii)
+- [Launch X-431 V+ Pro](https://www.amazon.com/gp/product/B00NID586M)
+- ... Basically anything from Launch, even if it's rebranded (like the MATCO tools)
+
+If your diagnostic scanner (or the Android app) has a "Home" page that looks similar to below, your data is probably being synced with Golo / Golo365 / AIT.
+
+![android_app_screenshot](./screenshot.jpg)
+
 ## Contributions
-Many hours of research and development went into discovering these entirely undocumented API endpoints. If you have an unlisted Golo365 endpoint, or know something that isn't listed here, please reach out via a Issue or Pull Request.
+Many hours of research and development went into discovering these entirely undocumented API endpoints. If you have an unlisted Golo365 endpoint, or know something that isn't listed here, please reach out via a GitHub Issue or Pull Request.
 
 ___
 
@@ -42,7 +57,7 @@ public function __construct(string $serial_no = "", string $service = "aitus")
 
 If a reporting device `serial_no` is provided, any search/reporting queries that use the optional `serial_no` argument will be provided with this serial number. See the variable documentation in the class for notes on what this argument is.
 
-The `service` argument defines which Golo365 service to report/receive data from. If your Launch LTD diagnostic tablet is built for the U.S., it's likely that all of your device-generated reports will reside within the AITUS service.
+The `service` argument defines which Golo365 service to report/receive data from. If your diagnostic tablet is built for the U.S., it's likely that all of your device-generated reports will reside within the AITUS service.
 
 ## setSerialNo
 This function returns the class instance, which enables function call chaining.
