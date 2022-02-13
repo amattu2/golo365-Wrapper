@@ -20,6 +20,7 @@ If any of the following domains look familiar to you, then you're probably in th
 - http://dbscar.com/
 - http://ait.golo365.com
 - http://aitus.golo365.com
+- https://api.mythinkcar.com/
 
 ### Related Auto Diagnostic Equipment
 
@@ -33,6 +34,13 @@ Or, if your shop is using any of the following tools, you're probably in the rig
 If your diagnostic scanner (or the Android app) has a "Home" page that looks similar to below, your data is probably being synced with Golo / Golo365 / AIT.
 
 ![android_app_screenshot](./screenshot.jpg)
+
+### Diagnostic Report/Record Examples
+If your diagnostic tool generates a report that looks like these, you're definitely in the right place:
+- http://aitus.golo365.com/report/think_car/?id=14025fbfjq8cKwTd8cOM5454&type=diag&lan=en-us
+- http://reportview.thinkcar.com/report/think_car/?id=e4a79e73jq1uKwtZtZTdLrnR&type=diag&lan=en-us
+- http://aws.ithinkcar.com/Home/Index/shareReportNew?id=e598545djq8cTdAEnR2YOMoG&type=diag&lan=en-us
+- http://aitus.golo365.com/Home/Report/reportDetail/diagnose_record_id/{ID_NUM_HERE}/report_type/X/timezone/0/l/en-us
 
 ## Contributions
 Many hours of research and development went into discovering these entirely undocumented API endpoints. If you have an unlisted Golo365 endpoint, or know something that isn't listed here, please reach out via a GitHub Issue or Pull Request.
