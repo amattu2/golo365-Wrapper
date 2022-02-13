@@ -32,6 +32,13 @@ namespace amattu;
  */
 class Golo365 {
   /**
+   * Golo365 Status Code for Success
+   *
+   * @var int
+   */
+  public const STATUS_CODE_SUCCESS = 0;
+
+  /**
    * An array of Golo365 endpoints
    *
    * @var array
@@ -68,6 +75,13 @@ class Golo365 {
   private $serial_no = "";
 
   /**
+   * Service Search Result Limit
+   *
+   * @var int
+   */
+  private $list_size = 0;
+
+  /**
    * Class Constructor
    *
    * @param  ?string $serial_no reporting device serial number
@@ -78,7 +92,7 @@ class Golo365 {
   public function __construct(string $serial_no = "", string $service = "aitus")
   {
     // Assign Serial Number
-    if ($serial_no) {
+    if ($serial_no && strlen($serial_no) == 12) {
       $this->serial_no = $serial_no;
     }
 
@@ -130,4 +144,211 @@ class Golo365 {
     return $this;
   }
 
+  /**
+   * Fetch Diagnostic Scan History by VIN
+   *
+   * Note:
+   * (1) If the serial_no variable is not empty,
+   *     it will be used to limit results to that
+   *     specific device
+   *
+   * @param  string $vin VIN to search
+   * @param  mixed $page page number to fetch
+   * @return Array of diagnostic scan history
+   * @throws \TypeError
+   * @throws \InvalidArgumentException
+   * @since  1.0.0
+   */
+  public function reportListByVIN(string $VIN, $page = "") : array
+  {
+    // Validate VIN
+    if (!$VIN || strlen($VIN) !== 17) {
+      throw new \InvalidArgumentException("VIN must be 17 characters long");
+    }
+
+    // Initialize Variables
+    $formatted_result = [];
+    $results = $this->post($this->endpoints["reportList"], $this->build_query_string([
+      "vin" => $VIN,
+      "serial_no" => $this->serial_no,
+      "page" => $page,
+      "size" => $this->list_size,
+    ])) ?: [];
+
+    // Build formatted result
+    foreach ($results as $result) {
+      // Validate Fields
+      if (!$result["diagnose_record_id"])
+        continue;
+      if (!$result["serial_number"])
+        continue;
+      if (!$result["rec_date"])
+        continue;
+      if (!$result["vin"])
+        continue;
+      if (!$result["report_url"])
+        continue;
+      if (!$result["report_type"])
+        continue;
+
+      // Format
+      $formatted_result[] = Array(
+        "record_id" => $result["diagnose_record_id"],
+        "serial_no" => $result["serial_number"],
+        "date" => $result["rec_date"],
+        "VIN" => $result["vin"],
+        "plate_number" => $result["plate_number"] || "",
+        "url" => $result["report_url"],
+        "type" => $result["report_type"],
+      );
+    }
+
+    // Return
+    return $formatted_result;
+  }
+
+    /**
+   * Fetch Diagnostic Scan History by License Plate Number
+   *
+   * Note:
+   * (1) If the serial_no variable is not empty,
+   *     it will be used to limit results to that
+   *     specific device
+   *
+   * @param  string $plate_number License Plate # to search
+   * @param  mixed $page page number to fetch
+   * @return Array of diagnostic scan history
+   * @throws \TypeError
+   * @throws \InvalidArgumentException
+   * @since  1.0.0
+   */
+  public function reportListByPlateNumber(string $plate_number, $page = "") : array
+  {
+    // Validate VIN
+    if (!$plate_number || empty($plate_number)) {
+      throw new \InvalidArgumentException("The license plate number must not be empty");
+    }
+
+    // Initialize Variables
+    $formatted_result = [];
+    $results = $this->post($this->endpoints["reportList"], $this->build_query_string([
+      "plate_number" => $plate_number,
+      "serial_no" => $this->serial_no,
+      "page" => $page,
+      "size" => $this->list_size,
+    ])) ?: [];
+
+    // Build formatted result
+    foreach ($results as $result) {
+      // Validate Fields
+      if (!$result["diagnose_record_id"])
+        continue;
+      if (!$result["serial_number"])
+        continue;
+      if (!$result["rec_date"])
+        continue;
+      if (!$result["vin"])
+        continue;
+      if (!$result["report_url"])
+        continue;
+      if (!$result["report_type"])
+        continue;
+
+      // Format
+      $formatted_result[] = Array(
+        "record_id" => $result["diagnose_record_id"],
+        "serial_no" => $result["serial_number"],
+        "date" => $result["rec_date"],
+        "VIN" => $result["vin"],
+        "plate_number" => $result["plate_number"] || "",
+        "url" => $result["report_url"],
+        "type" => $result["report_type"],
+      );
+    }
+
+    // Return
+    return $formatted_result;
+  }
+
+  /**
+   * Build a CURLOPT_POSTFIELDS valid query string
+   *
+   * @param  array $data
+   * @return string query string
+   * @throws TypeError
+   * @author Alec M.
+   * @date   2021-08-15
+   */
+  private function build_query_string(array $data) : string
+  {
+    // Variables
+    $query_string = '';
+
+    // Build String
+    foreach($data as $key => $value) {
+      if (!$key || !$value) {
+        continue;
+      }
+
+      $query_string .= "{$key}={$value}&";
+    }
+
+    // Return
+    return rtrim($query_string, '&');
+  }
+
+  /**
+   * Perform a HTTP POST Request
+   *
+   * @param  string $endpoint
+   * @param  string $fields
+   * @return array|null
+   */
+  private function post(string $endpoint, string $fields) : ?array
+  {
+    // Create a cURL handle
+    $ch = curl_init(strtr($endpoint, [
+      "%service" => $this->service,
+    ]));
+
+    // Set the options
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+      "Accept: application/json",
+    ]);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_NOBODY, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+    // Execute the request
+    $data = null;
+    $resp = curl_exec($ch);
+    $errn = curl_error($ch);
+    $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    // Validate the response
+    if (!$resp || $errn || !($data = json_decode($resp, true))) {
+      return null;
+    }
+
+    // Validate response codes
+    if ($status_code !== 200 || $data['code'] !== Golo365::STATUS_CODE_SUCCESS) {
+      return null;
+    }
+
+    // Validate response data
+    if (!isset($data['data']) || !is_array($data['data'])) {
+      return null;
+    }
+
+    // Return the parsed response
+    return $data['data'];
+  }
 }
