@@ -89,4 +89,45 @@ class Golo365 {
       $this->service = "aitus";
     }
   }
+
+  /**
+   * Set or Remove the Device Serial Number
+   *
+   * @param  ?string $serial_no
+   * @return self
+   * @since  1.0.0
+   */
+  public function setSerialNo(string $serial_no = "") : self
+  {
+    // Assign Serial Number
+    if ($serial_no && strlen($serial_no) == 12) {
+      $this->serial_no = $serial_no;
+    } else {
+      $this->serial_no = "";
+    }
+
+    // Return
+    return $this;
+  }
+
+  /**
+   * Set or Remove the Report Listing Size Limit
+   *
+   * @param  ?integer $size
+   * @return self
+   * @since  1.0.0
+   */
+  public function setListSize(int $size = 0) : self
+  {
+    // Assign List Size
+    if ($size > 0) {
+      $this->list_size = $size;
+    } else {
+      $this->list_size = 0;
+    }
+
+    // Return
+    return $this;
+  }
+
 }
