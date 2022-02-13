@@ -213,6 +213,12 @@ class Golo365 {
         "plate_number" => $result["plate_number"] || "",
         "url" => $result["report_url"],
         "type" => $result["report_type"],
+        "_raw" => function() use ($result) {
+          return $result;
+        },
+        "_reportDetail" => function() use ($result) {
+          return $this->reportDetail($result["diagnose_record_id"], $result["report_type"]);
+        },
       );
     }
 
@@ -276,7 +282,12 @@ class Golo365 {
         "plate_number" => $result["plate_number"] || "",
         "url" => $result["report_url"],
         "type" => $result["report_type"],
-        // TBD add raw function and reportDetail function
+        "_raw" => function() use ($result) {
+          return $result;
+        },
+        "_reportDetail" => function() use ($result) {
+          return $this->reportDetail($result["diagnose_record_id"], $result["report_type"]);
+        },
       );
     }
 

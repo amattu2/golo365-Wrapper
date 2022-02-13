@@ -136,12 +136,18 @@ Array
     [plate_number] => string
     [url] => string
     [type] => string
+    [_raw] => Closure
+    [_reportDetail] => Closure
   )
 
   // ... repeating
 
 )
 ```
+
+### Notes
+1. To access the raw API data (messy), you can use the closure function available via the `_raw` index.
+2. You may call the `reportDetail` function via the `_reportDetail` index; it takes no arguments as they are derived from the current element.
 
 ## reportListByPlateNumber
 ```PHP
@@ -176,6 +182,8 @@ Array
     [plate_number] => string
     [url] => string
     [type] => string
+    [_raw] => Closure
+    [_reportDetail] => Closure
   )
 
   // ... repeating
@@ -185,6 +193,8 @@ Array
 
 ### Notes
 1. The reliability of this function is dependent on end-users reporting the License Plate Number during the diagnostic session. If this was not done, those results will not be included in the return value. **If possible, use `reportListByVIN` instead**.
+2. To access the raw API data (messy), you can use the closure function available via the `_raw` index.
+3. You may call the `reportDetail` function via the `_reportDetail` index; it takes no arguments as they are derived from the current element.
 
 ## reportDetail
 This endpoint provides additional details about a diagnostic event record; such as which systems were scanned, which software was used, etc.
