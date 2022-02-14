@@ -9,41 +9,11 @@ The end goal of the wrapper is to remove the concept of relying the handheld dia
 - Perform a License-to-VIN decode
 - ... More integrations coming soon
 
-## Am I in the right place?
-### Related Domains
-
-If any of the following domains look familiar to you, then you're probably in the right place.
-- https://www.golo365.com/
-- https://www.launchtechusa.com/
-- http://x431.com
-- http://api.dbscar.com/
-- http://dbscar.com/
-- http://ait.golo365.com
-- http://aitus.golo365.com
-- https://api.mythinkcar.com/
-
-### Related Auto Diagnostic Equipment
-
-Or, if your shop is using any of the following tools, you're probably in the right place:
-- [MATCO MAXIMUS 4.0 TABLET](https://www.matcotools.com/catalog/product/MDMAX4CL/MAXIMUS-4-0-TABLET-WITH-PASSENGER-CAR-SOFTWARE/)
-- [Launch Gear Scan Plus Diagnostic Tool](https://www.bestbuyautoequipment.com/launch-gear-scan-plus-diagnostic-tool-p/301050458.htm)
-- [Launch X-431 Torque 3](https://www.launchtechusa.com/product-page/x431-torqueiii)
-- [Launch X-431 V+ Pro](https://www.amazon.com/gp/product/B00NID586M)
-- ... Basically anything from Launch, even if it's rebranded (like the MATCO tools)
-
-If your diagnostic scanner (or the Android app) has a "Home" page that looks similar to below, your data is probably being synced with Golo / Golo365 / AIT.
-
-![android_app_screenshot](./screenshot.jpg)
-
-### Diagnostic Report/Record Examples
-If your diagnostic tool generates a report that looks like these, you're definitely in the right place:
-- http://aitus.golo365.com/report/think_car/?id=14025fbfjq8cKwTd8cOM5454&type=diag&lan=en-us
-- http://reportview.thinkcar.com/report/think_car/?id=e4a79e73jq1uKwtZtZTdLrnR&type=diag&lan=en-us
-- http://aws.ithinkcar.com/Home/Index/shareReportNew?id=e598545djq8cTdAEnR2YOMoG&type=diag&lan=en-us
-- http://aitus.golo365.com/Home/Report/reportDetail/diagnose_record_id/{ID_NUM_HERE}/report_type/X/timezone/0/l/en-us
+## Need More?
+I've put an extensive amount of Golo365 research into the [DOCUMENTATION.md](./DOCUMENTATION.md) file. If you want to create your own wrapper, without reverse engineering this one, rely on information from that file. The [DOCUMENTATION.md](./DOCUMENTATION.md) file also details endpoints discovered but not implemented yet.
 
 ## Contributions
-Many hours of research and development went into discovering these entirely undocumented API endpoints. If you have an unlisted Golo365 endpoint, or know something that isn't listed here, please reach out via a GitHub Issue or Pull Request.
+Many ~~hours~~ days of research and development went into discovering these entirely undocumented API endpoints. If you have an unlisted Golo365 endpoint, or know something that isn't listed in this repository, please reach out via a GitHub Issue or Pull Request.
 
 ___
 
