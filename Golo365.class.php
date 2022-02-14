@@ -56,6 +56,7 @@ class Golo365 {
     "reportList" => "http://%service.golo365.com/Home/HttApi/reportList",
     "reportDetail" => "http://%service.golo365.com/Home/HttApi/reportDetail",
     "upload_report_data" => "http://%service.golo365.com/Home/Cloud/upload_report_data",
+    "upload_accessory_info" => "http://%service.golo365.com/Home/Cloud/upload_accessory_info",
     "getPlateByVin" => "http://%service.golo365.com/Home/HttApi/getPlateByVin",
     "getVinByplateNum" => "http://%service.golo365.com/Home/Index/getVinByplateNum",
   ];
@@ -370,6 +371,17 @@ class Golo365 {
    * @since  1.0.0
    */
   public function upload_report_data() : array
+  {
+    throw new Exception("Unimplemented function");
+  }
+
+  /**
+   * Upload additional information to a Diagnostic Report
+   *
+   * @return array
+   * @since  1.0.0
+   */
+  public function upload_accessory_info() : array
   {
     throw new Exception("Unimplemented function");
   }
