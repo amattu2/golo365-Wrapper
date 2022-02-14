@@ -239,8 +239,6 @@ Array
 ___
 
 # To-Do
-- getPlateByVIN
-- getVINByPlateNumber
 - upload_report_data
 - upload_accessory_info
 - mergeMultiReport
