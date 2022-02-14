@@ -166,6 +166,44 @@ Array
 2. To access the raw API data (messy), you can use the closure function available via the `_raw` index.
 3. You may call the `reportDetail` function via the `_reportDetail` index; it takes no arguments as they are derived from the current element.
 
+## reportList
+This function fetches all reports produced by a device serial number. It accepts one optional argument. The serial number provided during class instantiation (or via `setSerialNo`) is used.
+
+```PHP
+/**
+ * Fetch Diagnostic Scan History by Serial Number
+ *
+ * @param mixed $page page number to fetch
+ */
+public function reportList($page = "") : array
+```
+
+### Output
+```PHP
+Array
+(
+  [0] => Array
+  (
+    [record_id] => int
+    [serial_no] => int
+    [date] => 1644710448
+    [VIN] => string
+    [plate_number] => string
+    [url] => string
+    [type] => string
+    [_raw] => Closure
+    [_reportDetail] => Closure
+  )
+
+  // ... repeating
+
+)
+```
+
+### Notes
+1. To access the raw API data (messy), you can use the closure function available via the `_raw` index.
+2. You may call the `reportDetail` function via the `_reportDetail` index; it takes no arguments as they are derived from the current element.
+
 ## reportDetail
 This endpoint provides additional details about a diagnostic event record; such as which systems were scanned, which software was used, etc.
 
@@ -212,6 +250,8 @@ ___
 - upload_report_data
 - upload_accessory_info
 - mergeMultiReport
+- getVINByPlateNumber
+- getPlateByVIN
 
 ___
 
