@@ -206,7 +206,7 @@ class Golo365 {
     // Initialize Variables
     $results = $this->post($this->endpoints["reportList"], $this->build_query_string([
       "vin" => $VIN,
-      "serial_no" => $this->serial_no,
+      "serial_number" => $this->serial_no,
       "page" => $page,
       "size" => $this->list_size,
     ])) ?: [];
@@ -240,7 +240,7 @@ class Golo365 {
     // Initialize Variables
     $results = $this->post($this->endpoints["reportList"], $this->build_query_string([
       "plate_number" => $plate_number,
-      "serial_no" => $this->serial_no,
+      "serial_number" => $this->serial_no,
       "page" => $page,
       "size" => $this->list_size,
     ])) ?: [];
