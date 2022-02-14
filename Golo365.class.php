@@ -159,6 +159,29 @@ class Golo365 {
   }
 
   /**
+   * Fetch Diagnostic Scan History by Serial Number
+   *
+   * @param mixed $page page number to fetch
+   */
+  public function reportList($page = "") : array
+  {
+    // Validate VIN
+    if (!$this->serial_no || strlen($this->serial_no) !== 12) {
+      throw new \InvalidArgumentException("You must specify a serial number to fetch report list.");
+    }
+
+    // Initialize Variables
+    $results = $this->post($this->endpoints["reportList"], $this->build_query_string([
+      "serial_number" => $this->serial_no,
+      "page" => $page,
+      "size" => $this->list_size,
+    ])) ?: [];
+
+    // Return
+    return $this->parse_report_list($results);
+  }
+
+  /**
    * Fetch Diagnostic Scan History by VIN
    *
    * Note:
@@ -181,7 +204,6 @@ class Golo365 {
     }
 
     // Initialize Variables
-    $formatted_result = [];
     $results = $this->post($this->endpoints["reportList"], $this->build_query_string([
       "vin" => $VIN,
       "serial_no" => $this->serial_no,
@@ -189,42 +211,8 @@ class Golo365 {
       "size" => $this->list_size,
     ])) ?: [];
 
-    // Build formatted result
-    foreach ($results as $result) {
-      // Validate Fields
-      if (!$result["diagnose_record_id"])
-        continue;
-      if (!$result["serial_number"])
-        continue;
-      if (!$result["rec_date"])
-        continue;
-      if (!$result["vin"])
-        continue;
-      if (!$result["report_url"])
-        continue;
-      if (!$result["report_type"])
-        continue;
-
-      // Format
-      $formatted_result[] = Array(
-        "record_id" => $result["diagnose_record_id"],
-        "serial_no" => $result["serial_number"],
-        "date" => $result["rec_date"],
-        "VIN" => $result["vin"],
-        "plate_number" => $result["plate_number"] || "",
-        "url" => $result["report_url"],
-        "type" => $result["report_type"],
-        "_raw" => function() use ($result) {
-          return $result;
-        },
-        "_reportDetail" => function() use ($result) {
-          return $this->reportDetail($result["diagnose_record_id"], $result["report_type"]);
-        },
-      );
-    }
-
     // Return
-    return $formatted_result;
+    return $this->parse_report_list($results);
   }
 
   /**
@@ -250,7 +238,6 @@ class Golo365 {
     }
 
     // Initialize Variables
-    $formatted_result = [];
     $results = $this->post($this->endpoints["reportList"], $this->build_query_string([
       "plate_number" => $plate_number,
       "serial_no" => $this->serial_no,
@@ -258,42 +245,8 @@ class Golo365 {
       "size" => $this->list_size,
     ])) ?: [];
 
-    // Build formatted result
-    foreach ($results as $result) {
-      // Validate Fields
-      if (!$result["diagnose_record_id"])
-        continue;
-      if (!$result["serial_number"])
-        continue;
-      if (!$result["rec_date"])
-        continue;
-      if (!$result["vin"])
-        continue;
-      if (!$result["report_url"])
-        continue;
-      if (!$result["report_type"])
-        continue;
-
-      // Format
-      $formatted_result[] = Array(
-        "record_id" => $result["diagnose_record_id"],
-        "serial_no" => $result["serial_number"],
-        "date" => $result["rec_date"],
-        "VIN" => $result["vin"],
-        "plate_number" => $result["plate_number"] || "",
-        "url" => $result["report_url"],
-        "type" => $result["report_type"],
-        "_raw" => function() use ($result) {
-          return $result;
-        },
-        "_reportDetail" => function() use ($result) {
-          return $this->reportDetail($result["diagnose_record_id"], $result["report_type"]);
-        },
-      );
-    }
-
     // Return
-    return $formatted_result;
+    return $this->parse_report_list($results);
   }
 
   /**
@@ -466,5 +419,55 @@ class Golo365 {
 
     // Return the parsed response
     return $data['data'];
+  }
+
+  /**
+   * Parse a reportList return result
+   *
+   * @param  array $d raw data
+   * @return array $formatted data
+   * @throws \TypeError
+   * @since  1.0.0
+   */
+  private function parse_report_list(array $d = []) : array
+  {
+    $formatted = [];
+
+    // Build formatted result
+    foreach ($d as $result) {
+      // Validate Fields
+      if (!$result["diagnose_record_id"])
+        continue;
+      if (!$result["serial_number"])
+        continue;
+      if (!$result["rec_date"])
+        continue;
+      if (!$result["vin"])
+        continue;
+      if (!$result["report_url"])
+        continue;
+      if (!$result["report_type"])
+        continue;
+
+      // Format
+      $formatted[] = Array(
+        "record_id" => $result["diagnose_record_id"],
+        "serial_no" => $result["serial_number"],
+        "date" => $result["rec_date"],
+        "VIN" => $result["vin"],
+        "plate_number" => $result["plate_number"] || "",
+        "url" => $result["report_url"],
+        "type" => $result["report_type"],
+        "_raw" => function() use ($result) {
+          return $result;
+        },
+        "_reportDetail" => function() use ($result) {
+          return $this->reportDetail($result["diagnose_record_id"], $result["report_type"]);
+        },
+      );
+    }
+
+    // Return
+    return $formatted;
   }
 }
