@@ -24,6 +24,8 @@
 namespace amattu;
 
 use Exception;
+use TypeError;
+use InvalidArgumentException;
 
 /**
  * Golo-Wrapper
@@ -167,7 +169,7 @@ class Golo365 {
   {
     // Validate VIN
     if (!$this->serial_no || strlen($this->serial_no) !== 12) {
-      throw new \InvalidArgumentException("You must specify a serial number to fetch report list.");
+      throw new InvalidArgumentException("You must specify a serial number to fetch report list.");
     }
 
     // Initialize Variables
@@ -192,15 +194,15 @@ class Golo365 {
    * @param  string $vin VIN to search
    * @param  mixed $page page number to fetch
    * @return Array of diagnostic scan history
-   * @throws \TypeError
-   * @throws \InvalidArgumentException
+   * @throws TypeError
+   * @throws InvalidArgumentException
    * @since  1.0.0
    */
   public function reportListByVIN(string $VIN, $page = "") : array
   {
     // Validate VIN
     if (!$VIN || strlen($VIN) !== 17) {
-      throw new \InvalidArgumentException("VIN must be 17 characters long");
+      throw new InvalidArgumentException("VIN must be 17 characters long");
     }
 
     // Initialize Variables
@@ -226,15 +228,15 @@ class Golo365 {
    * @param  string $plate_number License Plate # to search
    * @param  mixed $page page number to fetch
    * @return Array of diagnostic scan history
-   * @throws \TypeError
-   * @throws \InvalidArgumentException
+   * @throws TypeError
+   * @throws InvalidArgumentException
    * @since  1.0.0
    */
   public function reportListByPlateNumber(string $plate_number, $page = "") : array
   {
     // Validate VIN
     if (!$plate_number || empty($plate_number)) {
-      throw new \InvalidArgumentException("The license plate number must not be empty");
+      throw new InvalidArgumentException("The license plate number must not be empty");
     }
 
     // Initialize Variables
@@ -255,20 +257,20 @@ class Golo365 {
    * @param  int $record_id
    * @param  string $type
    * @return array
-   * @throws \TypeError
-   * @throws \InvalidArgumentException
+   * @throws TypeError
+   * @throws InvalidArgumentException
    * @since  1.0.0
    */
   public function reportDetail(int $record_id, string $type) : array
   {
     // Validate Record ID
     if (!$record_id || $record_id <= 0) {
-      throw new \InvalidArgumentException("The record ID must be a positive integer");
+      throw new InvalidArgumentException("The record ID must be a positive integer");
     }
 
     // Validate Type
     if (!$type || !in_array($type, Golo365::RECORD_TYPES)) {
-      throw new \InvalidArgumentException("The type must be one of the following: " . implode(", ", Golo365::RECORD_TYPES));
+      throw new InvalidArgumentException("The type must be one of the following: " . implode(", ", Golo365::RECORD_TYPES));
     }
 
     // Fetch Data
@@ -298,14 +300,14 @@ class Golo365 {
    *
    * @param  string $VIN the vehicle VIN number to search a plate for
    * @return array
-   * @throws \InvalidArgumentException
+   * @throws InvalidArgumentException
    * @since  1.0.0
    */
   public function getPlateByVIN(string $VIN) : array
   {
     // Validate input
     if (!$VIN || strlen($VIN) !== 17) {
-      throw new \InvalidArgumentException("The VIN must be 17 characters long");
+      throw new InvalidArgumentException("The VIN must be 17 characters long");
     }
 
     // Fetch Data
@@ -448,7 +450,7 @@ class Golo365 {
    *
    * @param  array $d raw data
    * @return array $formatted data
-   * @throws \TypeError
+   * @throws TypeError
    * @since  1.0.0
    */
   private function parse_report_list(array $d = []) : array
