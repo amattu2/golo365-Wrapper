@@ -332,6 +332,11 @@ class Golo365 {
   /**
    * Fetch the VIN by License Plate
    *
+   * Note:
+   * (1) This service only exists on ait.golo365.com,
+   * and the constructor service selection for this endpoint
+   * is ignored
+   *
    * @param  string $plate_number License Plate # to search
    * @return array
    * @throws TypeError
