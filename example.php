@@ -22,3 +22,6 @@ echo "<pre>";
 
 // Fetch a license plate number by VIN
 //print_r($wrapper->getPlateByVIN(""));
+
+// Fetch a VIN by plate num
+//print_r($wrapper->getVINByPlateNumber(""));

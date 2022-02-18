@@ -60,7 +60,7 @@ class Golo365 {
     "upload_report_data" => "http://%service.golo365.com/Home/Cloud/upload_report_data",
     "upload_accessory_info" => "http://%service.golo365.com/Home/Cloud/upload_accessory_info",
     "getPlateByVin" => "http://%service.golo365.com/Home/HttApi/getPlateByVin",
-    "getVinByplateNum" => "http://%service.golo365.com/Home/Index/getVinByplateNum",
+    "getVinByplateNum" => "http://ait.golo365.com/Home/Index/getVinByplateNum",
   ];
 
   /**
@@ -334,11 +334,34 @@ class Golo365 {
    *
    * @param  string $plate_number License Plate # to search
    * @return array
+   * @throws TypeError
+   * @throws InvalidArgumentException
    * @since  1.0.0
    */
   public function getVINByPlateNumber(string $plate_number) : array
   {
-    throw new Exception("Unimplemented function");
+    // Validate input
+    if (!$plate_number || strlen($plate_number) <= 0) {
+      throw new InvalidArgumentException("The license plate number should not be empty");
+    }
+
+    // Fetch Data
+    $results = $this->post($this->endpoints["getVinByplateNum"], $this->build_query_string([
+      "plate_number" => $plate_number,
+    ])) ?: [];
+
+    // Validate Return Data
+    if (!$results["vin"] || !$results["plate_number"]) {
+      return [];
+    } else {
+      return Array(
+        "VIN" => $results["vin"],
+        "plate_number" => $results["plate_number"],
+        "_raw" => function() use ($results) {
+          return $results;
+        }
+      );
+    }
   }
 
   /**

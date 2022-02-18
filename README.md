@@ -263,8 +263,8 @@ public function getPlateByVIN(string $VIN) : array
 ```PHP
 Array
 (
-  [VIN] => SALAN2V60GA811146
-  [plate_number] => 桂B030C8
+  [VIN] => string
+  [plate_number] => string
   [_raw] => Closure Object
 )
 ```
@@ -273,13 +273,42 @@ Array
 1. This endpoint relies on user-inputted data to return a matching plate number. This endpoint does not rely on a government data source, and could easily provide incorrect information.
 2. To access raw API data, simply call the `_raw` closure object
 
+## getVINByPlateNumber
+This function is the inverse of `getPlateByVIN`, and returns a VIN number when provided a license plate number. **Important** see the notes about this endpoint below.
+
+```PHP
+/**
+ * Fetch the VIN by License Plate
+ *
+ * @param  string $plate_number License Plate # to search
+ * @return array
+ * @throws TypeError
+ * @throws InvalidArgumentException
+ * @since  1.0.0
+ */
+public function getVINByPlateNumber(string $plate_number) : array
+```
+
+### Output
+```PHP
+Array
+(
+  [VIN] => string
+  [plate_number] => string
+  [_raw] => Closure Object
+)
+```
+
+### Notes
+1. This endpoint **does not rely on a government data source**. It relies on the data passed when a diagnostic device is submitting a diagnostic event. Unless the plate number was reported during this diagnostic event, no results will be returned.
+2. The only raw data returned is `vin` and `plate_number`; but for consistency sake, the `_raw` closure object is still available for accessing the raw API data.
+
 ___
 
 # To-Do
 - upload_report_data
 - upload_accessory_info
 - mergeMultiReport
-- getVINByPlateNumber
 
 ___
 
