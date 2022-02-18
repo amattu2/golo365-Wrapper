@@ -244,6 +244,35 @@ Array
 ### Notes
 1. To access the raw data from this array, call the anonymous function (closure) `_raw`
 
+## getPlateByVIN
+This function will return a license plate number associated with a VIN number. **Important** see the notes about this endpoint below.
+
+```PHP
+/**
+ * Fetch a License Plate by the VIN Number
+ *
+ * @param  string $VIN the vehicle VIN number to search a plate for
+ * @return array
+ * @throws \InvalidArgumentException
+ * @since  1.0.0
+ */
+public function getPlateByVIN(string $VIN) : array
+```
+
+### Output
+```PHP
+Array
+(
+  [VIN] => SALAN2V60GA811146
+  [plate_number] => 桂B030C8
+  [_raw] => Closure Object
+)
+```
+
+### Notes
+1. This endpoint relies on user-inputted data to return a matching plate number. This endpoint does not rely on a government data source, and could easily provide incorrect information.
+2. To access raw API data, simply call the `_raw` closure object
+
 ___
 
 # To-Do
@@ -251,7 +280,6 @@ ___
 - upload_accessory_info
 - mergeMultiReport
 - getVINByPlateNumber
-- getPlateByVIN
 
 ___
 

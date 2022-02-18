@@ -296,13 +296,35 @@ class Golo365 {
   /**
    * Fetch a License Plate by the VIN Number
    *
-   * @param  string $VIN the VIN number to search
+   * @param  string $VIN the vehicle VIN number to search a plate for
    * @return array
+   * @throws \InvalidArgumentException
    * @since  1.0.0
    */
-  public function getPlateByVIN(string $plate_number) : array
+  public function getPlateByVIN(string $VIN) : array
   {
-    throw new Exception("Unimplemented function");
+    // Validate input
+    if (!$VIN || strlen($VIN) !== 17) {
+      throw new \InvalidArgumentException("The VIN must be 17 characters long");
+    }
+
+    // Fetch Data
+    $results = $this->post($this->endpoints["getPlateByVin"], $this->build_query_string([
+      "vin" => $VIN,
+    ])) ?: [];
+
+    // Validate Return Data
+    if (!$results["vin"] || !$results["plate_number"]) {
+      return [];
+    } else {
+      return Array(
+        "VIN" => $results["vin"],
+        "plate_number" => $results["plate_number"],
+        "_raw" => function() use ($results) {
+          return $results;
+        }
+      );
+    }
   }
 
   /**

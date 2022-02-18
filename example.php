@@ -19,3 +19,6 @@ echo "<pre>";
 
 // Fetch additional details about a Diagnostic report
 //print_r($wrapper->reportDetail(1, "X"));
+
+// Fetch a license plate number by VIN
+//print_r($wrapper->getPlateByVIN(""));
