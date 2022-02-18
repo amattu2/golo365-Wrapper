@@ -1,36 +1,43 @@
 # Brief
+
 ## What is this file?
+
 This file covers all Golo365 API documentation discovered to-date. It outlines the various components of their multitude of APIs and endpoints. Moreover, it briefly covers the greedy marketing techniques employed by companies who sell the Launch Tech LTD. diagnostic equipment.
 
 ## What is Golo365?
+
 Golo365 is the underlying data connection service behind many automotive diagnostic computers and equipment. Device manufacturers, such as Launch Tech LTD and Matco Tools rely on them for various services. The goal of this API wrapper is to simplify access to Golo365's *extremely undocumented* API endpoints, and to allow for independent individuals or companies to integrate critical data connections between Golo365 and their own proprietary services.
 
 ## What is Launch LTD?
+
 Launch Tech (aka Launch, aka Launch Tech Co. LTD, aka Launch USA, etc) is a single organization that markets their automotive diagnostic equipment under different brands.
 
 ## What is the MATCO Maximus?
+
 The MATCO Maximus (3.0, 4.0, etc) diagnostic tablet is a Launch Tech LTD. device that's rebranded and sold at a **huge** markup (often $5,000USD or above). The Maximus product line is not akin to Snap-On or Autel in their product development; these are not products produced by MATCO. Do not be fooled.
 
 ## Am I in the right place?
+
 If you're unsure whether this document will be useful to you, then compare your current situation to the following scenarios.
 
 ### Related Domains
 
 If any of the following domains look familiar to you, then you're in the right place.
 
-- https://www.golo365.com/
-- https://www.launchtechusa.com/
-- http://x431.com
-- http://api.dbscar.com/
-- http://dbscar.com/
-- http://ait.golo365.com
-- http://aitus.golo365.com
-- https://api.mythinkcar.com/
-- http://aws.golo365.com/
+- <https://www.golo365.com/>
+- <https://www.launchtechusa.com/>
+- <http://x431.com>
+- <http://api.dbscar.com/>
+- <http://dbscar.com/>
+- <http://ait.golo365.com>
+- <http://aitus.golo365.com>
+- <https://api.mythinkcar.com/>
+- <http://aws.golo365.com/>
 
 ### Related Auto Diagnostic Equipment
 
 If you're familiar with, or using any diagnostic equipment, or anything akin to it, you're in the right place.
+
 - [MATCO MAXIMUS 4.0 TABLET](https://www.matcotools.com/catalog/product/MDMAX4CL/MAXIMUS-4-0-TABLET-WITH-PASSENGER-CAR-SOFTWARE/)
 - [Launch Gear Scan Plus Diagnostic Tool](https://www.bestbuyautoequipment.com/launch-gear-scan-plus-diagnostic-tool-p/301050458.htm)
 - [Launch X-431 Torque 3](https://www.launchtechusa.com/product-page/x431-torqueiii)
@@ -42,13 +49,16 @@ If your diagnostic scanner (or the Android app) has a "Home" page that looks sim
 ![android_app_screenshot](./screenshot.jpg)
 
 ### Diagnostic Report/Record Examples
+
 If your diagnostic tool generates a report that looks like these, you're definitely in the right place:
-- http://aitus.golo365.com/report/think_car/?id=14025fbfjq8cKwTd8cOM5454&type=diag&lan=en-us
-- http://reportview.thinkcar.com/report/think_car/?id=e4a79e73jq1uKwtZtZTdLrnR&type=diag&lan=en-us
-- http://aws.ithinkcar.com/Home/Index/shareReportNew?id=e598545djq8cTdAEnR2YOMoG&type=diag&lan=en-us
-- http://aitus.golo365.com/Home/Report/reportDetail/diagnose_record_id/{ID_NUM_HERE}/report_type/X/timezone/0/l/en-us
+
+- <http://aitus.golo365.com/report/think_car/?id=14025fbfjq8cKwTd8cOM5454&type=diag&lan=en-us>
+- <http://reportview.thinkcar.com/report/think_car/?id=e4a79e73jq1uKwtZtZTdLrnR&type=diag&lan=en-us>
+- <http://aws.ithinkcar.com/Home/Index/shareReportNew?id=e598545djq8cTdAEnR2YOMoG&type=diag&lan=en-us>
+- <http://aitus.golo365.com/Home/Report/reportDetail/diagnose_record_id/{ID_NUM_HERE}/report_type/X/timezone/0/l/en-us>
 
 ## Contributions
+
 Many days of research and development went into discovering these entirely undocumented API endpoints. If you have an unlisted Golo365 endpoint, or know something that isn't listed here, please reach out via a GitHub Issue or Pull Request.
 
 ___
@@ -56,11 +66,13 @@ ___
 # Common Variables
 
 ## Serial Number
+
 Although `serial_no` is not a required field for most fetching-type endpoints, this field refers to the serial number assigned to the Launch Tech device. This value is provided when you purchase the device, and is an important reference for when you submit a report event to Golo365. The exact specifications are unknown, but they appear to be 12 digits long.
 
 *Know something else about this field? Submit a Issue.*
 
 ## Report Types
+
 Throughout the scope of the API, the term `report_type` will appear. The `report_type` corresponds to the device that produces the report, and consists of ~2 characters. See the table below.
 
 |Type|Description|Generating Device(s)|Example|
@@ -78,18 +90,22 @@ ___
 # API
 
 ## URLs
+
 The Golo365 service relies on the following URLs.
 
 |URL|Description|Notes|
 |:-|:-|:-|
-|http://aitus.golo365.com/|Service URL for US based customers. By default, Launch Tech USA diagnostic devices rely on this URL.||
-|http://ait.golo365.com/|Service URL for all non-US customers.||
+|<http://aitus.golo365.com/>|Service URL for US based customers. By default, Launch Tech USA diagnostic devices rely on this URL.||
+|<http://ait.golo365.com/>|Service URL for all non-US customers.||
 
 ### Note
-1. The service data does **NOT** sync across subdomains. i.e. reports submitted to http://aitus.golo365.com will not be available via the http://ait.golo365.com service.
+
+1. The service data does **NOT** sync across subdomains. i.e. reports submitted to <http://aitus.golo365.com> will not be available via the <http://ait.golo365.com> service.
 
 ## Conventions
+
 Unless specifically states within the scope of an endpoint, all endpoints meet the following expectation:
+
 1. Respond only to HTTP POST requests
 2. Accept only `x-www-form-urlencoded` post body
 3. Return a JSON response
@@ -109,6 +125,7 @@ This endpoint provides enhanced details about a particular report.
 |`report_type`|string|`X`|
 
 #### Success Example Call
+
 ```JSON
 {
   "code": 0,
@@ -148,6 +165,7 @@ Fetch a VIN number by license plate number.
 |`plate_number`|string|`123456`|
 
 #### Success Example Call
+
 ```JSON
 {
     "code": 0,
@@ -159,6 +177,7 @@ Fetch a VIN number by license plate number.
 ```
 
 #### Note
+
 1. This relies on user-provided data provided during a new event report (i.e. diagnostic scan), and is not collected through a government source.
 
 ### Home/HttApi/getPlateByVin
@@ -172,6 +191,7 @@ This returns a license plate number by vehicle VIN
 |`vin`|string|`SALAN2V60GA811146`|
 
 #### Success Example Call
+
 ```JSON
 {
     "code": 0,
@@ -219,6 +239,7 @@ This returns a collection of report records by VIN, license plate, device serial
 You may combine `vin` with `serial_number` OR `plate_number` with `serial_number` to limit by device and vehicle. To search for all records generated by a single diagnostic device, use `serial_number`.
 
 #### Success Example Call
+
 ```JSON
 {
     "code": 0,
