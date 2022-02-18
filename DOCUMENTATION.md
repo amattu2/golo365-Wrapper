@@ -113,6 +113,27 @@ Unless specifically states within the scope of an endpoint, all endpoints meet t
 
 ## Endpoints
 
+This is the full list of known endpoints. Detailed documentation might not be available.
+
+|Url|Description|
+|:-|:-|
+|<http://aitus.golo365.com/Home/HttApi/reportList>|Lists all reports performed on a VIN|
+|<http://aitus.golo365.com/Home/HttApi/reportDetail>|Provides enhanced details about what was performed during a report scan|
+|<http://aitus.golo365.com/Home/HttApi/getPlateByVin>|Returns the known license plate associated with a VIN|
+|<http://ait.golo365.com/Home/Index/getVinByplateNum>|Returns the VIN associated with a license plate number|
+|<http://aitus.golo365.com/Home/OverseaApi/relateAitAccountNumber/>||
+|<http://ait.golo365.com/Home/OverseaApi/bindingPressureDevice>|Binds a TPMS tool to an account|
+|<http://aitus.golo365.com/Home/Cloud/upload_report_data>||
+|<http://ait.golo365.com/Home/Cloud/upload_accessory_info>||
+|<http://ait.golo365.com/Home/Block/getAddressByPhone>||
+|<http://aitus.golo365.com/Home/Block/getAddressByEmail>||
+|<http://ait.golo365.com/Home/Block/queryBalance>||
+|<http://aitus.golo365.com/Home/OverseaApi/deleteDeviceByCC>||
+|<http://ait.golo365.com/Home/HttApi/mergeMultiReport>||
+|<http://aitus.golo365.com/Home/OverseaApi/uploadDataFlow>||
+
+## Endpoint Details
+
 ### Home/HttApi/reportDetail
 
 This endpoint provides enhanced details about a particular report.
@@ -180,7 +201,7 @@ Fetch a VIN number by license plate number.
 
 1. This relies on user-provided data provided during a new event report (i.e. diagnostic scan), and is not collected through a government source.
 
-### Home/HttApi/getPlateByVin
+### <http://ait.golo365.com/Home/Index/getVinByplateNum>
 
 This returns a license plate number by vehicle VIN
 
@@ -219,7 +240,7 @@ This returns a license plate number by vehicle VIN
 
 ### Home/HttApi/reportList
 
-This returns a collection of report records by VIN, license plate, device serial number.
+This returns a collection of report records by VIN, license plate, or device serial number.
 
 #### Arguments
 
@@ -250,3 +271,23 @@ You may combine `vin` with `serial_number` OR `plate_number` with `serial_number
     "system_list": []
 }
 ```
+
+### Home/OverseaApi/relateAitAccountNumber/
+
+### Home/OverseaApi/bindingPressureDevice
+
+### Home/Cloud/upload_report_data
+
+### Home/Cloud/upload_accessory_info
+
+### Home/Block/getAddressByPhone
+
+### Home/Block/getAddressByEmail
+
+### Home/Block/queryBalance
+
+### Home/OverseaApi/deleteDeviceByCC
+
+### Home/HttApi/mergeMultiReport
+
+### Home/OverseaApi/uploadDataFlow
