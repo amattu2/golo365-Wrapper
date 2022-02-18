@@ -93,10 +93,10 @@ ___
 
 The Golo365 service relies on the following URLs.
 
-|URL|Description|Notes|
-|:-|:-|:-|
-|<http://aitus.golo365.com/>|Service URL for US based customers. By default, Launch Tech USA diagnostic devices rely on this URL.||
-|<http://ait.golo365.com/>|Service URL for all non-US customers.||
+|URL|Description|
+|:-|:-|
+|<http://aitus.golo365.com/>|Service URL for US based customers. By default, Launch Tech USA diagnostic devices rely on this URL.|
+|<http://ait.golo365.com/>|Service URL for all non-US customers.|
 
 ### Note
 
