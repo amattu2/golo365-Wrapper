@@ -510,6 +510,8 @@ class Golo365 {
         "plate_number" => $result["plate_number"] || "",
         "url" => $result["report_url"],
         "type" => $result["report_type"],
+        "dtc_count" => isset($result["dtcnumber"]) && is_numeric($result["dtcnumber"]) ? $result["dtcnumber"] : 0,
+        "full_scan" => isset($result["is_full_scan"]) && is_bool($result["is_full_scan"]) ? $result["is_full_scan"] : 0,
         "_raw" => function() use ($result) {
           return $result;
         },
