@@ -113,7 +113,7 @@ Array
   (
     [record_id] => int
     [serial_no] => int
-    [date] => 1644710448
+    [date] => Y-m-d H:i:s
     [VIN] => string
     [plate_number] => string
     [url] => string
@@ -162,7 +162,7 @@ Array
   (
     [record_id] => int
     [serial_no] => int
-    [date] => 1644710448
+    [date] => Y-m-d H:i:s
     [VIN] => string
     [plate_number] => string
     [url] => string
@@ -204,7 +204,7 @@ Array
   (
     [record_id] => int
     [serial_no] => int
-    [date] => 1644710448
+    [date] => Y-m-d H:i:s
     [VIN] => string
     [plate_number] => string
     [url] => string

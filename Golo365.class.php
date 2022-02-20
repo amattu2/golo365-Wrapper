@@ -505,7 +505,7 @@ class Golo365 {
       $formatted[] = Array(
         "record_id" => $result["diagnose_record_id"],
         "serial_no" => $result["serial_number"],
-        "date" => $result["rec_date"],
+        "date" => date("Y-m-d H:i:s", $result["rec_date"]),
         "VIN" => $result["vin"],
         "plate_number" => $result["plate_number"] || "",
         "url" => $result["report_url"],
