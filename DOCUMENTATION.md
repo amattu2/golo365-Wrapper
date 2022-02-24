@@ -79,6 +79,7 @@ Throughout the scope of the API, the term `report_type` will appear. The `report
 |:-:|:-|:-|:-:|
 |`A`|Full Vehicle Systems AI Inspection Report|LaunchTech Roxy|[Example](http://aitus.golo365.com/Home/Report/reportDetail/diagnose_record_id/6f822c280C3b1u3bDh/report_type/A/timezone/0/l/en-us)|
 |`D`|Inspection Report|*unknown*|[Example](http://aitus.golo365.com/Home/Report/reportDetail/diagnose_record_id/b3ec8787jq54nR54nRKw2YTd/report_type/D/l/en-us)|
+|`CCC`|||
 |`E`|Vehicle EZ Diag Report|*unknown*|[Example](http://aitus.golo365.com/Home/Report/reportDetail/diagnose_record_id/4112bb39ge1u8ctZnRAEnRoG54/report_type/E/l/en-us)|
 |`X`|Vehicle Fault Diagnostic Report|X-431, Any X-Series Launch device|[Example](http://aitus.golo365.com/Home/Report/reportDetail/diagnose_record_id/8ca37750jqtZ54AEOMtZ2YIF/report_type/X/l/en-us)|
 |`TC`|ThinkCar|*unknown*|[Example](http://aitus.golo365.com/Home/ThinkCar/reportDetail/diagnose_record_id/279bd55fsa1u1u3bnRTd/report_type/TC/l/en-us)|
@@ -131,6 +132,11 @@ This is the full list of known endpoints. Detailed documentation might not be av
 |<http://aitus.golo365.com/Home/OverseaApi/deleteDeviceByCC>||
 |<http://ait.golo365.com/Home/HttApi/mergeMultiReport>||
 |<http://aitus.golo365.com/Home/OverseaApi/uploadDataFlow>||
+|<http://aitus.golo365.com/Home/HttApi/addRepairShop>||
+|<http://ait.golo365.com/Home/BigData/uploadAppMonitorData>||
+|<http://aitus.golo365.com/Home/Block/queryUserVsAddrRelation>||
+|<http://aitus.golo365.com/Home/IntelligentDiagnose/getCommonlyUsedSoftware>||
+|<http://aitus.golo365.com/Home/Index/map/diagnose_record_id/{{diagnose_no}}/report_type/{{record_type}}>||
 
 ## Endpoint Details
 
@@ -291,3 +297,13 @@ You may combine `vin` with `serial_number` OR `plate_number` with `serial_number
 ### Home/HttApi/mergeMultiReport
 
 ### Home/OverseaApi/uploadDataFlow
+
+### Home/Index/map/diagnose_record_id/{{diagnose_no}}/report_type/{{record_type}}
+
+### Home/HttApi/addRepairShop
+
+### Home/BigData/uploadAppMonitorData
+
+### Home/Block/queryUserVsAddrRelation
+
+### Home/IntelligentDiagnose/getCommonlyUsedSoftware
