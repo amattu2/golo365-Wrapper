@@ -1,0 +1,263 @@
+[
+  {
+    "_id": "498b6250-3e3c-4234-ae4d-70ce7561fea3",
+    "colId": "29c677a0-97c0-47b2-9119-2624d1d0d2bc",
+    "containerId": "",
+    "name": "reportList",
+    "url": "http://{{service}}.golo365.com/Home/HttApi/reportList",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-06-05T16:26:21.198Z",
+    "modified": "2022-06-05T16:28:48.505Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/x-www-form-urlencoded"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "formencoded",
+      "raw": "",
+      "form": [
+        {
+          "name": "vin",
+          "value": "SALAN2V60GA811146"
+        },
+        {
+          "name": "plate_number",
+          "value": "123456",
+          "isDisabled": true
+        },
+        {
+          "name": "cvn",
+          "value": "",
+          "isDisabled": true
+        },
+        {
+          "name": "diagnose_type",
+          "value": "3",
+          "isDisabled": true
+        },
+        {
+          "name": "size",
+          "value": "300",
+          "isDisabled": true
+        },
+        {
+          "name": "page",
+          "value": "1",
+          "isDisabled": true
+        }
+      ]
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "Content-Type",
+        "custom": "",
+        "action": "contains",
+        "value": "application/json"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "isjson",
+        "value": "true"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.code",
+        "action": "equal",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "_id": "e1d34a57-3ee0-4a6c-b8df-82d2a0a17dcc",
+    "colId": "29c677a0-97c0-47b2-9119-2624d1d0d2bc",
+    "containerId": "",
+    "name": "reportDetail",
+    "url": "http://{{service}}.golo365.com/Home/HttApi/reportDetail",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-06-05T16:29:21.314Z",
+    "modified": "2022-06-05T16:30:06.499Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/x-www-form-urlencoded"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "formencoded",
+      "raw": "",
+      "form": [
+        {
+          "name": "diagnose_record_id",
+          "value": "1920391"
+        },
+        {
+          "name": "report_type",
+          "value": "X"
+        }
+      ]
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "Content-Type",
+        "custom": "",
+        "action": "contains",
+        "value": "application/json"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "isjson",
+        "value": "true"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.code",
+        "action": "equal",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "_id": "5ff628b1-4dd2-44a1-a550-2b004fcbb841",
+    "colId": "29c677a0-97c0-47b2-9119-2624d1d0d2bc",
+    "containerId": "",
+    "name": "getVinByplateNum",
+    "url": "http://ait.golo365.com/Home/Index/getVinByplateNum",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2022-06-05T16:30:28.345Z",
+    "modified": "2022-06-05T16:31:19.771Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/x-www-form-urlencoded"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "formencoded",
+      "raw": "",
+      "form": [
+        {
+          "name": "vin",
+          "value": "SALAN2V60GA811146"
+        }
+      ]
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "Content-Type",
+        "custom": "",
+        "action": "contains",
+        "value": "application/json"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "isjson",
+        "value": "true"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.code",
+        "action": "equal",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "_id": "9fb1af9c-31c1-4c63-b73f-f528bd4493fe",
+    "colId": "29c677a0-97c0-47b2-9119-2624d1d0d2bc",
+    "containerId": "",
+    "name": "getPlateByVin",
+    "url": "http://{{service}}.golo365.com/Home/HttApi/getPlateByVin",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2022-06-05T16:33:38.674Z",
+    "modified": "2022-06-05T16:35:18.569Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/x-www-form-urlencoded"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "formencoded",
+      "raw": "",
+      "form": [
+        {
+          "name": "vin",
+          "value": "SALAN2V60GA811146"
+        }
+      ]
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "Content-Type",
+        "custom": "",
+        "action": "contains",
+        "value": "application/json"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "isjson",
+        "value": "true"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.code",
+        "action": "equal",
+        "value": "0"
+      }
+    ]
+  }
+]

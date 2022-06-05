@@ -21,6 +21,10 @@ I've put an extensive amount of Golo365 research into the [DOCUMENTATION.md](./D
 
 Many ~~hours~~ days of research and development went into discovering these entirely undocumented API endpoints. If you have an unlisted Golo365 endpoint, or know something that isn't listed in this repository, please reach out via a GitHub Issue or Pull Request.
 
+## Postman / Thunder Client
+
+This repository comes with a Thunder Client collection for the Golo365 API. To use it, visit [.vscode/thunder-client](./.vscode/thunder-client) and import the json into your VS Code Thunder Client extension.
+
 ___
 
 # Usage
