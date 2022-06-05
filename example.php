@@ -1,10 +1,10 @@
 <?php
 
 // Get required wrapper class
-require(__DIR__ . "/Golo365.class.php");
+require(__DIR__ . "/src/Wrapper.php");
 
 // Initialize Golo365 wrapper
-$wrapper = new amattu\Golo365();
+$wrapper = new Golo365\Wrapper();
 
 echo "<pre>";
 

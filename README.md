@@ -27,6 +27,12 @@ ___
 
 The function documentation is below. Alternatively, see the `example.php` file included with the repository for hands-on demonstrations of various functionality.
 
+## Install
+
+```bash
+composer require amattu2/golo365-wrapper
+```
+
 ## __construct
 
 The class constructor accepts only optional arguments.

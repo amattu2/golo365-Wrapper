@@ -21,7 +21,7 @@
  */
 
 // Class Namespace
-namespace amattu;
+namespace Golo365;
 
 use Exception;
 use TypeError;
@@ -34,7 +34,7 @@ use InvalidArgumentException;
  * @version 1.0.0
  * @package amattu
  */
-class Golo365 {
+class Wrapper {
   /**
    * Golo365 Status Code for Success
    *
@@ -269,8 +269,8 @@ class Golo365 {
     }
 
     // Validate Type
-    if (!$type || !in_array($type, Golo365::RECORD_TYPES)) {
-      throw new InvalidArgumentException("The type must be one of the following: " . implode(", ", Golo365::RECORD_TYPES));
+    if (!$type || !in_array($type, self::RECORD_TYPES)) {
+      throw new InvalidArgumentException("The type must be one of the following: " . implode(", ", self::RECORD_TYPES));
     }
 
     // Fetch Data
@@ -460,7 +460,7 @@ class Golo365 {
     }
 
     // Validate response codes
-    if ($status_code !== 200 || $data['code'] !== Golo365::STATUS_CODE_SUCCESS) {
+    if ($status_code !== 200 || $data['code'] !== self::STATUS_CODE_SUCCESS) {
       return null;
     }
 
